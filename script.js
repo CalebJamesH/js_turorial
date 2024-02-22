@@ -1,3 +1,5 @@
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DECLARING VARIABLES <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
 let xp = 0;
 let health = 100;
 let gold = 50;
@@ -16,12 +18,18 @@ const goldText = document.querySelector("#goldText");
 const monsterStats = document.querySelector("#monsterStats");
 const monsterName = document.querySelector("#monsterName");
 const monsterHealthText = document.querySelector("#monsterHealth");
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE ARE YOUR WEAPONS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
 const weapons = [
   { name: 'stick', power: 5 },
   { name: 'dagger', power: 30 },
   { name: 'claw hammer', power: 50 },
   { name: 'sword', power: 100 }
 ];
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE ARE THE MONSTERS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
 const monsters = [
   {
     name: "slime",
@@ -39,6 +47,9 @@ const monsters = [
     health: 300
   }
 ]
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> HERE ARE THE LOCATIONS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
 const locations = [
   {
     name: "town square",
@@ -95,6 +106,8 @@ button1.onclick = goStore;
 button2.onclick = goCave;
 button3.onclick = fightDragon;
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FUNCTION TO CHANGE LOCATIONS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
 function update(location) {
   monsterStats.style.display = "none";
   button1.innerText = location["button text"][0];
@@ -118,6 +131,9 @@ function goCave() {
   update(locations[2]);
 }
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FUNCTIONS FOR THE MARKET <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
+// buy health
 function buyHealth() {
   if (gold >= 10) {
     gold -= 10;
@@ -129,6 +145,7 @@ function buyHealth() {
   }
 }
 
+// buy weapons
 function buyWeapon() {
   if (currentWeapon < weapons.length - 1) {
     if (gold >= 30) {
@@ -149,6 +166,7 @@ function buyWeapon() {
   }
 }
 
+// sell weapons
 function sellWeapon() {
   if (inventory.length > 1) {
     gold += 15;
@@ -160,6 +178,8 @@ function sellWeapon() {
     text.innerText = "Don't sell your only weapon!";
   }
 }
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FUNCTIONS TO FIGHT MONSTERS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
 
 function fightSlime() {
   fighting = 0;
@@ -183,6 +203,8 @@ function goFight() {
   monsterName.innerText = monsters[fighting].name;
   monsterHealthText.innerText = monsterHealth;
 }
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DEFINES YOUR ATTACK STRENGTH, HEALTH, AND MONSTER HEALTH AFTER ATTACK <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
 
 function attack() {
   text.innerText = "The " + monsters[fighting].name + " attacks.";
@@ -220,9 +242,13 @@ function isMonsterHit() {
   return Math.random() > .2 || health < 20;
 }
 
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> DEFINES YOUR DODGING <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
+
 function dodge() {
   text.innerText = "You dodge the attack from the " + monsters[fighting].name;
 }
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> MONSTER'S DEATH <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
 
 function defeatMonster() {
   gold += Math.floor(monsters[fighting].level * 6.7);
@@ -231,6 +257,8 @@ function defeatMonster() {
   xpText.innerText = xp;
   update(locations[4]);
 }
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> GAME OVER AND RESTART <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
 
 function lose() {
   update(locations[5]);
@@ -251,6 +279,8 @@ function restart() {
   xpText.innerText = xp;
   goTown();
 }
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> EASTER EGG GAME <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\\
 
 function easterEgg() {
   update(locations[7]);
